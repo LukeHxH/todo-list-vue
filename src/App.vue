@@ -5,14 +5,14 @@
     <input type="text" placeholder="Digite um item para adicionar na lista..."
     v-model="content" @keyup.enter="addItem()" autofocus>
 
-    <ul v-for="(item, index) in todoList" v-bind:key="index">
+    <ul v-for="(item, index) in todoList" :key="index">
       <li>
-        <TodoItem v-bind:item="item" @remove="removeItem(index)">
+        <TodoItem :item="item" @remove="removeItem(index)">
           Item {{item.index + 1}}
         </TodoItem>
       </li>
     </ul>
-  </div>
+  </div> 
 </template>
 
 <script>
