@@ -1,13 +1,14 @@
 <template>
     <b-list-group-item class="mb-2 d-flex justify-content-between">
         <div class="todo-item-right">
-            <div v-show="!item.editing" class="todo-item-label"
+            <div v-if="!item.editing" class="todo-item-label"
             @dblclick="edit(item)">
                 {{ item.description }}
             </div>
             
-            <b-form-input v-show="item.editing" class="todo-item-edit"
-            v-model="item.description" @keyup.enter="doneEdit(item)">
+            <b-form-input v-else class="todo-item-edit"
+            v-model="item.description" @keyup.enter="doneEdit(item)"
+            @keyup.esc="cancelEdit(item)" @blur="doneEdit(item)" v-focus>
             </b-form-input>
         </div>
 
@@ -25,14 +26,36 @@ export default {
     props: {
         item: Object
     },
+    data () {
+        return {
+            beforeEditCache: ''
+        }
+    },
     methods: {
         edit(item) {
-            item.editing = true;
+            this.beforeEditCache = item.description
+            item.editing = true
         },
-        
+
         doneEdit(item) {
-            if (item.description.trim().length > 0) {
-                item.editing = false;
+            if (item.description.trim().length === 0) {
+                item.description = this.beforeEditCache
+            }
+
+            item.editing = false
+        },
+
+        cancelEdit(item) {
+            item.editing = false
+            item.description = this.beforeEditCache
+            this.beforeEditCache = ''
+        }
+    },
+
+    directives: {
+        focus: {
+            inserted: (el) => {
+                el.focus()
             }
         }
     }
