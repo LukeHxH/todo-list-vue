@@ -1,7 +1,20 @@
 <template>
   <div id="app">
-    <h1 class="text-center mt-3">{{ title }}</h1>
-    <TodoList></TodoList>
+    <div class="container mt-3">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">{{ title }}</h1>
+        </div>
+
+        <div class="card-body">
+          <TodoList></TodoList>
+        </div>
+
+        <div class="card-footer">
+          Feito por <a href="https://github.com/LukeHxH" target="_blank">Lucas de Medeiros</a>
+        </div>
+      </div>
+    </div>
   </div> 
 </template>
 

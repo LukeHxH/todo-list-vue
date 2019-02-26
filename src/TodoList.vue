@@ -1,5 +1,5 @@
 <template>
-    <b-container class="p-3 mt-2 bg-light border">
+    <b-container class="">
         <b-input-group class="mb-2">
         <b-form-input v-model="newTodo" @keyup.enter="addItem" autofocus
         placeholder="O que eu preciso fazer?">
@@ -13,8 +13,9 @@
         <p v-if="todos.length == 0" class="text-center font-italic mb-0">
             Nenhuma tarefa a ser feita...
         </p>
+
         <div v-else>
-            <b-list-group class="mt-3 mb-3" v-for="(item, index) in todos" :key="index">
+            <b-list-group class="mt-3 mb-3" v-for="(item, index) in todosFiltered" :key="index">
                 <TodoItem :item="item" @remove="removeItem(index)"></TodoItem>
             </b-list-group>
 
@@ -28,6 +29,30 @@
                 </div>
 
                 <div>{{ remaining }} tarefas restantes</div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <div>
+                    Filtros: 
+                    <b-button-group>
+                        <b-button variant="success" :class="{ active: filter == 'all' }"
+                        @click="filter = 'all'">
+                            Todas
+                        </b-button>
+
+                        <b-button variant="success" :class="{ active: filter == 'active' }"
+                        @click="filter = 'active'">
+                            Ativas
+                        </b-button>
+
+                        <b-button variant="success" :class="{ active: filter == 'completed' }"
+                        @click="filter = 'completed'">
+                            Completas
+                        </b-button>
+                    </b-button-group>
+                </div>
             </div>
         </div>
     </b-container>
@@ -43,6 +68,7 @@ export default {
         return {
             newTodo: '',
             newId: 1,
+            filter: 'all',
             todos: [],
         }
     },
@@ -60,6 +86,16 @@ export default {
 
         checkAllText() {
             return this.remaining > 0 ? "Marcar " : "Desmarcar "
+        },
+
+        todosFiltered() {
+            if (this.filter == 'all') {
+                return this.todos
+            } else if (this.filter == 'active') {
+                return this.todos.filter((todo) => !todo.completed)
+            } else {
+                return this.todos.filter((todo) => todo.completed)
+            }
         }
     },
 

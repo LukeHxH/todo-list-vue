@@ -17,7 +17,7 @@
         </div>
 
         <div class="bd-highlight ml-auto">
-            <b-button variant="danger" @click="$emit('remove')">
+            <b-button variant="danger btn-sm" @click="$emit('remove')">
                 Excluir
             </b-button>
         </div>
@@ -27,7 +27,7 @@
 <script>
 export default {
     name: 'TodoItem',
-    
+
     props: {
         item: Object
     },
