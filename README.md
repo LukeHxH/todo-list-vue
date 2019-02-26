@@ -1,6 +1,6 @@
 # starting-vue
 
-> A Vue.js project
+> Um projeto em Vue.js de uma lista de afazeres, usando [Vue + Bootstrap](https://bootstrap-vue.js.org/).
 
 ## Build Setup
 
@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Para mais detalhes, consulte: [docs for vue-loader](http://vuejs.github.io/vue-loader).
