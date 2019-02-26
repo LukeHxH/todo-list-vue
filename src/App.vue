@@ -1,17 +1,24 @@
 <template>
   <div id="app">
-    <h1>{{title}}</h1>
-    
-    <input type="text" placeholder="Digite um item para adicionar na lista..."
-    v-model="content" @keyup.enter="addItem()" autofocus>
+    <b-container>
+      <h1 class="text-center mb-3">{{title}}</h1>
 
-    <ul v-for="(item, index) in todoList" :key="index">
-      <li>
-        <TodoItem :item="item" @remove="removeItem(index)">
-          Item {{item.index + 1}}
-        </TodoItem>
-      </li>
-    </ul>
+      <b-input-group append="Adicionar item" class="mb-2">
+        <b-form-input v-model="content" @keyup.enter="addItem()" autofocus>
+
+        </b-form-input>
+      </b-input-group>
+
+      <b-list-group v-for="(item, index) in todoList" :key="index">
+          <b-list-group-item class="mb-2">
+
+            <TodoItem :item="item" @remove="removeItem(index)">
+              Item {{item.index + 1}}
+            </TodoItem>
+
+          </b-list-group-item>
+      </b-list-group>
+    </b-container>
   </div> 
 </template>
 
@@ -22,7 +29,7 @@ export default {
   name: 'app',
   data () {
     return {
-      title: 'Lista de afazeres (to-do list)',
+      title: 'Lista de afazeres',
       content: '',
       todoList: []
     }

@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+    <p>
         <span>{{ item.description }}</span>
-        <button @click="$emit('remove')">remover</button>
-    </div>
+        <b-button variant="danger" @click="$emit('remove')">remover</b-button>
+    </p>
 </template>
 
 <script>
