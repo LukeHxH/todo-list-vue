@@ -12,7 +12,7 @@ export default {
   name: 'app',
   data () {
     return {
-      title: 'Lista de afazeres'
+      title: 'Todo List with Vue.js'
     }
   },
   components: { TodoList }

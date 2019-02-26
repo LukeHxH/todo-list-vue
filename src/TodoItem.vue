@@ -21,6 +21,7 @@
 
 <script>
 export default {
+    name: 'TodoItem',
     props: {
         item: Object
     },
@@ -28,8 +29,11 @@ export default {
         edit(item) {
             item.editing = true;
         },
+        
         doneEdit(item) {
-            item.editing = false;
+            if (item.description.trim().length > 0) {
+                item.editing = false;
+            }
         }
     }
 }
