@@ -1,9 +1,13 @@
 <template>
-    <b-list-group-item class="mb-2 d-flex justify-content-between">
-        <div class="todo-item-right">
-            <div v-if="!item.editing" class="todo-item-label"
-            @dblclick="edit(item)">
-                {{ item.description }}
+    <b-list-group-item class="mb-2 d-flex bd-highlight" id="item">
+        <div class="bd-highlight p-2">
+            <b-form-checkbox v-model="item.completed"/>
+        </div>
+
+        <div class="bd-highlight ml-2">
+            <div v-if="!item.editing" @dblclick="edit(item)"
+            class="todo-item-label" :class="{completed : item.completed}">
+                <span>{{ item.description }}</span>
             </div>
             
             <b-form-input v-else class="todo-item-edit"
@@ -12,7 +16,7 @@
             </b-form-input>
         </div>
 
-        <div>
+        <div class="bd-highlight ml-auto">
             <b-button variant="danger" @click="$emit('remove')">
                 Excluir
             </b-button>
@@ -23,14 +27,17 @@
 <script>
 export default {
     name: 'TodoItem',
+    
     props: {
         item: Object
     },
+
     data () {
         return {
             beforeEditCache: ''
         }
     },
+
     methods: {
         edit(item) {
             this.beforeEditCache = item.description
@@ -64,8 +71,17 @@ export default {
 
 
 <style>
+    #item {
+        font-size: 24px;
+    }
+
     .todo-item-edit {
         font-size: 24px;
         color: #2c3e58;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: grey;
     }
 </style>
